@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div style="width:50%; border-color:gray;border-bottom-width:thin; border-style:solid; float:left;">
+        <div style="width:40%; padding-left: 2em; float:left">
+            <h2>Players (Top <i id="top">10</i>)</h2>
+            <ul id="players" />
+        </div>
+        <div style="width:40%; padding-left: 2em; float:right">
+            <h2>Select Top</h2>
+            <input type="text" id="count" size="5" />
+            <input type="button" value="Find" onclick="find();" />
+            <p id="carro" />
+        </div>
+    </div>
+    <div style="width:50%; border-color:gray;border-bottom-width:thin; border-style:solid; float:left" align="center">
+        <div style="width:90%; padding-left: 2em; float:left">
+            <h2>Store Result</h2>
+            <label>1st: &nbsp;</label><input type="text" id="first" size="20" /><br /><br />
+            <label>2nd: </label><input type="text" id="second" size="20" /><br /><br />
+            <input type="button" value="-----Store-----" onclick="result();" style="width:200px; height:30px" />
+            <p id="resultText" />
+        </div>
+    </div>
+    <div style="width:50%; border-color:gray;border-bottom-width:thin; border-style:solid; float:left" align="center">
+        <div style="width:90%; padding-left: 2em; float:left">
+            <h2>New Tournament</h2>
+            <label>Tournament(json): &nbsp;</label><input type="text" id="tournement" size="20" /><br /><br />
+            <input type="button" value="-----New-----" onclick="newC();" style="width:200px; height:30px" />
+            <p id="resultTextNew" />
+        </div>
+    </div>
+
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+        <script>
+            var uri = 'api/championship/top';
+            var uriResult = 'api/championship/result';
+            var uriNew = 'api/championship/new';
+
+            $(document).ready(function () {
+                loading();
+            });
+
+            function loading() {
+                // Send an AJAX request
+                $.getJSON(uri)
+                    .done(function (data) {
+
+                        $.each(data, function (key, item) {
+
+                            $('<li>', { text: formatItem(item) }).appendTo($('#players'));
+                        });
+                    });
+                $('#top').text("10");
+            }
+
+            function formatItem(item) {
+                return item.name + '-' + item.score + '-' + item.option;
+            }
+
+            function find() {
+                var id = $('#count').val();
+                $.getJSON(uri + '?count=' + id)
+                    .done(function (data) {
+                        $('#players').text("");
+                        $.each(data, function (key, item) {
+
+                            $('<li>', { text: formatItem(item) }).appendTo($('#players'));
+                        });
+                        $('#count').val("");
+                        $('#top').text(id);
+                    })
+                    .fail(function (jqXHR, textStatus, err) {
+                        $('#players').text('Error: ' + err);
+                    });
+            }
+
+            function result() {
+                jQuery.support.cors = true;
+                var datas = {
+                    first: $('#first').val(),
+                    second: $('#second').val()
+                };
+
+                $.ajax({
+                    url: uriResult,
+                    type: 'POST',
+                    data: JSON.stringify(datas),
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        $('#resultText').text(data);
+                        $('#first').val("");
+                        $('#second').val("");
+                        $('#players').text("");
+                        loading();
+                    },
+                    error: function (jqXHR, textStatus, err) {
+                        $('#resultText').text('Error: ' + err);
+                    }
+                });
+
+            }
+
+            function newC() {
+                jQuery.support.cors = true;
+                var datas = {
+                    data: $('#tournement').val()
+                };
+
+                $.ajax({
+                    url: uriNew,
+                    type: 'POST',
+                    data: JSON.stringify(datas),
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        $('#resultTextNew').text(data);
+                        $('#tournement').val("");
+                        $('#players').text("");
+                        loading();
+                    },
+                    error: function (jqXHR, textStatus, err) {
+                        $('#resultTextNew').text('Error: ' + err);
+                    }
+                });
+
+            }
+        </script>
+
+</body>
+</html>
