@@ -7,7 +7,7 @@ namespace API.Services
 {
     public class ChampionshipService : IChampionshipService
     {
-        private ChampionshipEntities1 db = new ChampionshipEntities1();
+        private ChampionshipEntities2 db = new ChampionshipEntities2();
 
         public Player GetPlayerByName(string name)
         {

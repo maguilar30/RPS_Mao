@@ -152,6 +152,21 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Azure.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Azure.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Azure.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Azure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Azure.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Azure.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ChampionshipController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,7 +176,7 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Player.cs">
-      <DependentUpon>PlayerDB.tt</DependentUpon>
+      <DependentUpon>Azure.tt</DependentUpon>
     </Compile>
     <Compile Include="PlayerDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -186,6 +201,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Azure.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Azure.edmx</DependentUpon>
+      <LastGenOutput>Azure.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Azure.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Azure.edmx</DependentUpon>
+      <LastGenOutput>Azure.cs</LastGenOutput>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -229,6 +254,14 @@
     <Content Include="PlayerDB.edmx.diagram">
       <DependentUpon>PlayerDB.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Azure.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Azure.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Azure.edmx.diagram">
+      <DependentUpon>Azure.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\championship.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
