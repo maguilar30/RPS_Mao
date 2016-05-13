@@ -15,5 +15,9 @@ namespace API.Services
 
         List<Player> GetPlayers();
 
+        List<Player> Tournament(List<Player> championship);
+
+        List<Player> GetPlayersList(string data);
+
     }
 }

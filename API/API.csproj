@@ -172,7 +172,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Player.cs">
@@ -196,8 +195,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ChampionshipService.cs" />
     <Compile Include="Services\IChampionshipService.cs" />
-    <Compile Include="Util\Rules.cs" />
-    <Compile Include="Util\StrategyEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
