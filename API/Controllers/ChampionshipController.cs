@@ -77,7 +77,7 @@ namespace API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    response = Request.CreateResponse<string>(System.Net.HttpStatusCode.OK, "{Error: " + ex + "}");
+                    response = Request.CreateResponse<string>(System.Net.HttpStatusCode.OK, "{Error: " + ex.Message + "}");
                     return response;
                 }
             }
